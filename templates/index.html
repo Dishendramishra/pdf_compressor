@@ -1,0 +1,136 @@
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+
+    <title>PDF Compressor</title>
+
+    <style>
+        #clockContainer {
+            position: relative;
+            margin: auto;
+            height: 100;
+            /*to make the height and width responsive*/
+            width: 100;
+            background: url(static/clock.png) no-repeat;
+            /*setting our background image*/
+            background-size: 100%;
+        }
+
+        #hour,
+        #minute,
+        #second {
+            position: absolute;
+            background: black;
+            border-radius: 10px;
+            transform-origin: bottom;
+        }
+
+        #hour {
+            width: 1.8%;
+            height: 25%;
+            top: 25%;
+            left: 48.85%;
+            opacity: 0.8;
+        }
+
+        #minute {
+            width: 1.6%;
+            height: 30%;
+            top: 19%;
+            left: 48.9%;
+            opacity: 0.8;
+        }
+
+        #second {
+            width: 1%;
+            height: 40%;
+            top: 9%;
+            left: 49.25%;
+            opacity: 0.8;
+        }
+
+        .vertical-center {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+
+    <script type="text/javascript">
+        setInterval(() => {
+            d = new Date(); //object of date()
+            hr = d.getHours();
+            min = d.getMinutes();
+            sec = d.getSeconds();
+            hr_rotation = 30 * hr + min / 2; //converting current time
+            min_rotation = 6 * min;
+            sec_rotation = 6 * sec;
+
+            hour.style.transform = `rotate(${hr_rotation}deg)`;
+            minute.style.transform = `rotate(${min_rotation}deg)`;
+            second.style.transform = `rotate(${sec_rotation}deg)`;
+        }, 1000);
+    </script>
+
+</head>
+
+<body style="background-image: url('static/bg.jpg');">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+        </script>
+
+
+    <center>
+        <div style="background: #004d66;" width="100%">
+            <table width="100%">
+                <tr>
+                    <td style="padding-left:50px" width="20%"><img src="static/logo.png"
+                            height="100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td width="60%">
+                        <p class="text-center" style="background: #004d66; color:white;font-size:40px; margin:0">
+                            राष्ट्रीय परीक्षा बोर्ड, नयी दिल्ली
+                        </p>
+                        <p class="text-center" style="background: #004d66; color:white;font-size:30px;  margin:0">
+                            PDF Compressor
+                        </p>
+                    </td>
+                    <td class="p-3" align='right'>
+                        <div id="clockContainer">
+                            <div id="hour"></div>
+                            <div id="minute"></div>
+                            <div id="second"></div>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </center>
+
+    <div class="container-fluid mt-4">
+        <div class="d-flex align-items-center justify-content-center">
+            <form
+                class="col-xs-8 col-xs-offset-2  col-sm-6 col-sm-offset-3 col-md-4 col-sm-offset-4 col-lg-2 col-lg-offset-5"
+                action="/upload_file" method="post" enctype="multipart/form-data" target="_blank">
+                <p>
+                    <label for="formFile" class="form-label">Select File</label>
+                    <input class="form-control" type="file" id="formFile" name="file" accept="application/pdf">
+                </p>
+                <button class="btn btn-primary btn-block" type="sumbit">convert</button>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
