@@ -4,6 +4,14 @@ A demo web app for PDF compression.
 
 Python Module Used: [GitHub - theeko74/pdfc: Simple python script to compress PDF](https://github.com/theeko74/pdfc)
 
+# Deply using single command
+
+Tested on Ubuntu-22.04.5 LTS Server
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Dishendramishra/pdf_compressor/refs/heads/main/deploy_app.sh)"
+```
+
 **Platform Dependencies:**
 
 - Install dependency Ghostscript. 
@@ -24,7 +32,7 @@ Install python dependencies using the file `requirements.txt` :
 
 ### Points to Ponder while depolying
 
-The app was deployed on **Ubuntu  Server 22.04.4 LTS**, using **Apache/2.4.52** and **mod_wsgi**. 
+The app was deployed on **Ubuntu  Server 22.04.5 LTS**, using **Apache/2.4.52** and **mod_wsgi**. 
 
 To install the dependencies mentined above use the command below:
 
