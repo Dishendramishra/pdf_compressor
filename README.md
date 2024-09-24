@@ -21,3 +21,35 @@ Install python dependencies using the file `requirements.txt` :
 #### Running App
 
 `python app.py`
+
+### Points to Ponder while depolying
+
+The app was deployed on **Ubuntu  Server 22.04.4 LTS**, using **Apache/2.4.52** and **mod_wsgi**. 
+
+To install the dependencies mentined above use the command below:
+
+```bash
+ sudo apt install libapache2-mod-wsgi-py3 apache2
+```
+
+You may like to enable reverse_proxy in apache2
+
+```bash
+sudo a2enmod proxy_http
+```
+
+### Some useful commands
+
+**Disable apache at start on ubuntu**
+
+you could simply disable it by:
+
+```
+sudo update-rc.d apache2 disable
+```
+
+and then if you would like to enable it again:
+
+```
+sudo update-rc.d apache2 enable
+```

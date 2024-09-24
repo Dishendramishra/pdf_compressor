@@ -39,15 +39,15 @@ def upload_file():
         
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            input_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            output_filename = os.path.join(app.config['UPLOAD_FOLDER'], "min_"+filename)
-            power = 0
-            # if filesize is greater than 20 MB use level-3 compression
-            if (os.path.getsize(input_filename) >> 20) > 20:
-                power = 3
+            file.save(os.path.join(app.root_path, "data", filename))
+            input_filename = os.path.join(app.root_path, "data", filename)
+            output_filename = os.path.join(app.root_path, "data", "min_"+filename)
+            power_ = 2
+            # if filesize is greater than 10 MB use level-3 compression
+            if (os.path.getsize(input_filename) >> 20) > 10:
+                power_ = 3
             pdf_compressor.compress(input_filename,
-                                        output_filename, power=power)
+                                        output_filename, power=power_)
             return redirect(url_for('download_file', name="min_"+filename))
 
         else:
@@ -60,4 +60,4 @@ def download_file(name):
     return send_from_directory(app.config["UPLOAD_FOLDER"], name)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80)
+    app.run()
