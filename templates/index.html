@@ -132,10 +132,9 @@
                     <tr>
                         <td>Compression Level</td>
                         <td>
-                            <select class="form-select"  id="compression_level">
+                            <select class="form-select"  id="compression_level" name="compression_level">
                                 <option value="strong">strong</option>
-                                <option value="medium" selected>medium</option>
-                                <option value="basic">basic</option>
+                                <option value="recommended" selected>recommended</option>
                               </select>
                             </td>
                     </tr>
@@ -151,5 +150,34 @@
 
 
 </body>
+<!-- <script>
+        const form = document.querySelector("form");
+        form.addEventListener("submit", handleSubmit);
+
+        function handleSubmit(event){
+            event.preventDefault();
+            uploadFiles();
+        }
+
+        function uploadFiles(){
+            const url = "/upload_file";
+            const formData = new FormData(form);
+
+            const fetchOptions = {
+                method: 'post',
+                body: formData,
+                redirect: "follow"
+            };
+
+            fetch(url, fetchOptions)
+                .then((response)=>{
+                    window.open(response.url);
+                })  
+                .catch(function(err) {
+                    console.info(err + " url: " + url);
+                });
+            console.log("done");
+        }
+</script> -->
 
 </html>

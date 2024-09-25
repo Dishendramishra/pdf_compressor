@@ -3,12 +3,18 @@ from fileinput import filename
 from pdfc import pdf_compressor
 from werkzeug.utils import secure_filename
 import os
+import uuid
 
 ALLOWED_EXTENSIONS = {'pdf'}
 UPLOAD_FOLDER = 'data'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+COMPRESSION_LEVELS = {
+    "strong" : "4",
+    "recommended" : "3",
+}
 
 @app.route('/favicon.ico') 
 def favicon(): 
@@ -41,14 +47,21 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.root_path, "data", filename))
             input_filename = os.path.join(app.root_path, "data", filename)
-            output_filename = os.path.join(app.root_path, "data", "min_"+filename)
-            power_ = 2
+            prefix = uuid.uuid4().hex
+            output_filename = os.path.join(app.root_path, "data", prefix+filename)
+           
+            power_ = 3
             # if filesize is greater than 10 MB use level-3 compression
-            if (os.path.getsize(input_filename) >> 20) > 10:
-                power_ = 3
+            # if (os.path.getsize(input_filename) >> 20) > 10:
+            #     power_ = 4
+            
+            clevel = request.form["compression_level"]
+            if clevel in COMPRESSION_LEVELS:
+                power_ = int(COMPRESSION_LEVELS[clevel])
+            print(f"POWER: {power_}")
             pdf_compressor.compress(input_filename,
                                         output_filename, power=power_)
-            return redirect(url_for('download_file', name="min_"+filename))
+            return redirect(url_for('download_file', name=prefix+filename))
 
         else:
             return("Only PDF files are allowed!")
