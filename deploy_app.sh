@@ -30,4 +30,8 @@ sudo cp pdf_compressor.conf /etc/apache2/sites-available/
 sudo a2dissite '*'
 sudo a2ensite pdf_compressor.conf
 sudo chmod -R 750 ~/.local/share/
+
+# increasing timeout on apache 
+sudo sed -i 's@Timeout 300@TimeOut 600@g' /etc/apache2/apache2.conf
+
 sudo systemctl reload apache2 && sudo systemctl restart apache2
