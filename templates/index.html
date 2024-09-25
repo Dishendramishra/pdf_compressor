@@ -121,11 +121,30 @@
             <form
                 class="col-xs-8 col-xs-offset-2  col-sm-6 col-sm-offset-3 col-md-4 col-sm-offset-4 col-lg-2 col-lg-offset-5"
                 action="/upload_file" method="post" enctype="multipart/form-data" target="_blank">
-                <p>
-                    <label for="formFile" class="form-label">Select File</label>
-                    <input class="form-control" type="file" id="formFile" name="file" accept="application/pdf">
-                </p>
-                <button class="btn btn-primary btn-block" type="sumbit">convert</button>
+                
+                <table class="table">
+                    <tr>
+                        <td>Select File</td>
+                        <td>
+                            <input class="form-control w-auto" type="file" id="formFile" name="file" accept="application/pdf">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Compression Level</td>
+                        <td>
+                            <select class="form-select"  id="compression_level">
+                                <option value="strong">strong</option>
+                                <option value="medium" selected>medium</option>
+                                <option value="basic">basic</option>
+                              </select>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            <button class="btn btn-primary btn-block" type="submit">convert</button>
+                        </td>
+                    </tr>
+                </table>
             </form>
         </div>
     </div>
