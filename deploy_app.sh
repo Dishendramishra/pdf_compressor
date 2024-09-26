@@ -1,9 +1,14 @@
 #!/bin/bash
-cd ~
 sudo apt update
 sudo apt install -y git ghostscript
-sudo apt install -y imagemagick
 
+# imagemagick installation
+sudo apt install -y imagemagick
+cd /etc/ImageMagick-*/
+# giving imagemagick write permission on pdfs
+sudo sed -i 's@</policymap>@  <policy domain="coder" rights="read | write" pattern="PDF" />\n</policymap>@g' ./policy.xml
+
+cd ~
 # Installing and enabling apache
 sudo apt install -y apache2 libapache2-mod-wsgi-py3
 sudo systemctl start apache2
@@ -34,5 +39,4 @@ sudo chmod -R 750 ~/.local/share/
 
 # increasing timeout on apache 
 sudo sed -i 's@Timeout 300@TimeOut 600@g' /etc/apache2/apache2.conf
-
 sudo systemctl reload apache2 && sudo systemctl restart apache2
