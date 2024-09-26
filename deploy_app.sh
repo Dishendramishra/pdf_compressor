@@ -2,6 +2,7 @@
 cd ~
 sudo apt update
 sudo apt install -y git ghostscript
+sudo apt install -y imagemagick
 
 # Installing and enabling apache
 sudo apt install -y apache2 libapache2-mod-wsgi-py3

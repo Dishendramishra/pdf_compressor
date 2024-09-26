@@ -59,9 +59,18 @@ def upload_file():
             if clevel in COMPRESSION_LEVELS:
                 power_ = int(COMPRESSION_LEVELS[clevel])
             print(f"POWER: {power_}")
-            pdf_compressor.compress(input_filename,
-                                        output_filename, power=power_)
-            return redirect(url_for('download_file', name=prefix+filename))
+            # pdf_compressor.compress(input_filename,
+            #                             output_filename, power=power_)
+            if power_ == 4:
+                task = os.system(f"convert -density 100x100 -quality 60 -compress jpeg {input_filename} {output_filename}")
+            else:
+                task = os.system(f"convert -density 150x150 -quality 60 -compress jpeg {input_filename} {output_filename}")
+            
+            
+            if task == 0:
+                return redirect(url_for('download_file', name=prefix+filename))
+            else:
+                return "Error!"
 
         else:
             return("Only PDF files are allowed!")
