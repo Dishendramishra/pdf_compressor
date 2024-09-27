@@ -62,9 +62,9 @@ def upload_file():
             # pdf_compressor.compress(input_filename,
             #                             output_filename, power=power_)
             if power_ == 4:
-                task = os.system(f"convert -density 120x120 -quality 60 -compress jpeg {input_filename} {output_filename}")
-            else:
                 task = os.system(f"convert -density 96x96 -quality 33 -compress jpeg {input_filename} {output_filename}")
+            else:
+                task = os.system(f"convert -density 120x120 -quality 60 -compress jpeg {input_filename} {output_filename}")
             
             
             if task == 0:
