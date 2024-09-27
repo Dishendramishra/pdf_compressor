@@ -1,4 +1,5 @@
 from flask import *
+from flask_cors import CORS
 from fileinput import filename
 from pdfc import pdf_compressor
 from werkzeug.utils import secure_filename
@@ -9,6 +10,7 @@ ALLOWED_EXTENSIONS = {'pdf'}
 UPLOAD_FOLDER = 'data'
 
 app = Flask(__name__)
+CORS(app, expose_headers=["Content-Disposition"])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 COMPRESSION_LEVELS = {
@@ -79,7 +81,12 @@ def upload_file():
 
 @app.route('/download_file/<name>')
 def download_file(name): 
-    return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+    # return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+
+    return send_file(
+        os.path.join(app.config["UPLOAD_FOLDER"], name),
+        as_attachment=True,
+    )
 
 if __name__ == "__main__":
     app.run()

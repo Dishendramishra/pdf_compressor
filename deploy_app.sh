@@ -4,9 +4,11 @@ sudo apt install -y git ghostscript
 
 # imagemagick installation
 sudo apt install -y graphicsmagick-imagemagick-compat
-cd /etc/ImageMagick-*/
+
+# reuired for newer version of imagemagick
+#cd /etc/ImageMagick-*/
 # giving imagemagick write permission on pdfs
-sudo sed -i 's@</policymap>@  <policy domain="coder" rights="read | write" pattern="PDF" />\n</policymap>@g' ./policy.xml
+#sudo sed -i 's@</policymap>@  <policy domain="coder" rights="read | write" pattern="PDF" />\n</policymap>@g' ./policy.xml
 
 cd ~
 # Installing and enabling apache
