@@ -61,13 +61,16 @@ def upload_file():
             if clevel in COMPRESSION_LEVELS:
                 power_ = int(COMPRESSION_LEVELS[clevel])
             print(f"POWER: {power_}")
-            # pdf_compressor.compress(input_filename,
-            #                             output_filename, power=power_)
-            if power_ == 4:
-                task = os.system(f"convert -density 96x96 -quality 33 -compress jpeg {input_filename} {output_filename}")
-            else:
-                task = os.system(f"convert -density 120x120 -quality 60 -compress jpeg {input_filename} {output_filename}")
             
+            task = True # to check if conversion is failed or succeed
+            if "optimize_graphics" in request.form:
+                if power_ == 4:
+                    task = os.system(f"convert -density 96x96 -quality 33 -compress jpeg {input_filename} {output_filename}")
+                else:
+                    task = os.system(f"convert -density 120x120 -quality 60 -compress jpeg {input_filename} {output_filename}")
+            else:
+                task = pdf_compressor.compress(input_filename,output_filename, power=power_)
+                task = 0 if task == None else 1
             
             if task == 0:
                 return redirect(url_for('download_file', name=prefix+filename))
