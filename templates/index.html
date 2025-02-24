@@ -83,107 +83,67 @@
 </head>
 
 <body style="background-image: url('static/bg.jpg');">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
         </script>
 
 
-    <center>
-        <div style="background: #004d66;" width="100%">
-            <table width="100%">
-                <tr>
-                    <td style="padding-left:50px" width="20%"><img src="static/logo.png"
-                            height="100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td width="60%">
-                        <p class="text-center" style="background: #004d66; color:white;font-size:40px; margin:0">
-                            राष्ट्रीय परीक्षा बोर्ड, नयी दिल्ली
-                        </p>
-                        <p class="text-center" style="background: #004d66; color:white;font-size:30px;  margin:0">
-                            PDF Compressor
-                        </p>
-                    </td>
-                    <td class="p-3" align='right'>
-                        <div id="clockContainer">
-                            <div id="hour"></div>
-                            <div id="minute"></div>
-                            <div id="second"></div>
-                        </div>
-                    </td>
-                </tr>
+    <div style="background: #004d66;">
+        <table width="100%">
+            <tr>
+                <td style="padding-left:50px" width="20%"><img src="static/logo.png" height="100"></td>
+                <td width="60%">
+                    <p class="text-center text-white h1">राष्ट्रीय परीक्षा बोर्ड, नयी दिल्ली</p>
+                    <p class="text-center text-white h3">PDF Compressor</p>
+                </td>
+                <td class="p-3" align='right'>
+                    <div id="clockContainer" style="background-image:url('static/clock.png');">
+                        <div id="hour"></div>
+                        <div id="minute"></div>
+                        <div id="second"></div>
+                    </div>
+                </td>
+            </tr>
 
-            </table>
-        </div>
-    </center>
-
-    <div class="container-fluid mt-4">
-        <div class="d-flex align-items-center justify-content-center">
-            <form
-                class="col-xs-8 col-xs-offset-2  col-sm-6 col-sm-offset-3 col-md-4 col-sm-offset-4 col-lg-2 col-lg-offset-5"
-                action="/upload_file" method="post" enctype="multipart/form-data" target="_blank">
-                
-                <table class="table">
-                    <tr>
-                        <td>Select File</td>
-                        <td>
-                            <input class="form-control w-auto" type="file" id="formFile" name="file" accept="application/pdf">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            Optimize Graphics ? (If pdf contains lots of images)
-                            <input type="checkbox" id="optimize_graphics" name="optimize_graphics" value="yes">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Compression Level</td>
-                        <td>
-                            <select class="form-select"  id="compression_level" name="compression_level">
-                                <option value="strong">strong</option>
-                                <option value="recommended" selected>recommended</option>
-                              </select>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="text-center">
-                            <button class="btn btn-primary btn-block" type="submit">convert</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
+        </table>
     </div>
 
+    <div class="mt-5 p-5 bg-light w-50 mx-auto rounded-3">
+        <form action="/upload_file" method="post" enctype="multipart/form-data" target="_blank">
 
+            <table class="table">
+                <tr>
+                    <td>Select File</td>
+                    <td>
+                        <input class="form-control w-auto" type="file" id="formFile" name="file"
+                            accept="application/pdf">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Optimize Graphics ? (If pdf contains lots of images)
+                        <input type="checkbox" id="optimize_graphics" name="optimize_graphics" value="yes">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Compression Level</td>
+                    <td>
+                        <select class="form-select" id="compression_level" name="compression_level">
+                            <option value="strong">strong</option>
+                            <option value="recommended" selected>recommended</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <button class="btn btn-primary btn-block" type="submit">convert</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
-<!-- <script>
-        const form = document.querySelector("form");
-        form.addEventListener("submit", handleSubmit);
 
-        function handleSubmit(event){
-            event.preventDefault();
-            uploadFiles();
-        }
-
-        function uploadFiles(){
-            const url = "/upload_file";
-            const formData = new FormData(form);
-
-            const fetchOptions = {
-                method: 'post',
-                body: formData,
-                redirect: "follow"
-            };
-
-            fetch(url, fetchOptions)
-                .then((response)=>{
-                    window.open(response.url);
-                })  
-                .catch(function(err) {
-                    console.info(err + " url: " + url);
-                });
-            console.log("done");
-        }
-</script> -->
 
 </html>
